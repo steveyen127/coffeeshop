@@ -1,11 +1,11 @@
 {% load static %}
 
 <div class="col-md-12 px-0" align="center" style="background-color: #fff4de;">
-  <img src="{% static 'logo/banner.png' %}" height="250px">
+  <a href="/"><img src="{% static 'logo/banner.png' %}" height="250px"></a>
 </div>
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="#">CABE</a>
+  <a class="navbar-brand" href="/">CABE</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -13,7 +13,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/roast/">Choose Bean<span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Shop</a>

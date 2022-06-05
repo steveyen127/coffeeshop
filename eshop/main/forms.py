@@ -1,0 +1,77 @@
+# _*_encoding:utf-8 *_*
+from django import forms
+from . import models
+
+FLAVOR_CHOICES = (
+	('Flower', 'Flower'),
+	('Berry', 'Berry'),
+	('Wood', 'Wood'),
+)
+
+FLAVOR_DETAIL_CHOICES = (
+	('Blueberry', 'Blueberry'),
+	('Strawberry', 'Strawberry'),
+	('Raspberry', 'Raspberry'),
+	('Rose', 'Rose'),
+	('Sunflower', 'Sunflower'),
+	('Pine', 'Pine'),
+	('Sandalwood', 'Sandalwood'),
+)
+
+FLAVOR_BERRY_CHOICES = (
+	('Blueberry', 'Blueberry'),
+	('Strawberry', 'Strawberry'),
+	('Raspberry', 'Raspberry'),
+)
+
+FLAVOR_FLOWER_CHOICES = (
+	('Rose', 'Rose'),
+	('Sunflower', 'Sunflower'),
+)
+
+FLAVOR_WOOD_CHOICES = (
+	('Pine', 'Pine'),
+	('Sandalwood', 'Sandalwood'),
+)
+
+ROAST_CHOICES = (
+	('Light', 'Light'),
+	('Medium', 'Medium'),
+	('Dark', 'Dark'),
+)
+
+class RoastForm(forms.Form):
+	roast = forms.ChoiceField(widget=forms.RadioSelect, label="Roast", choices=ROAST_CHOICES)
+
+class FlavorForm(forms.Form):
+	flavor = forms.ChoiceField(widget=forms.RadioSelect, label="Flavor", choices=FLAVOR_CHOICES)
+
+class FlavorDetailForm(forms.Form):
+	flavor_detail = forms.ChoiceField(widget=forms.RadioSelect, label="Flavor Detail", choices=FLAVOR_DETAIL_CHOICES)
+
+class FlavorBerryForm(forms.Form):
+	flavor_detail = forms.ChoiceField(widget=forms.RadioSelect, label="Flavor Detail", choices=FLAVOR_BERRY_CHOICES)
+
+class FlavorFlowerForm(forms.Form):
+	flavor_detail = forms.ChoiceField(widget=forms.RadioSelect, label="Flavor Detail", choices=FLAVOR_FLOWER_CHOICES)
+
+class FlavorWoodForm(forms.Form):
+	flavor_detail = forms.ChoiceField(widget=forms.RadioSelect, label="Flavor Detail", choices=FLAVOR_WOOD_CHOICES)
+
+
+# class PreferenceForm(forms.Form):
+	# class Meta:
+	# 	model = models.FlavorDetail
+	# 	fields = ['detail']
+	# flavor = forms.ModelMultipleChoiceField(queryset=models.FlavorDetail.objects.all(), widget=forms.CheckboxSelectMultiple(), label="Preference", choices=CHOICES)
+	# flavor = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), label="Preference", choices=FLAVOR_CHOICES)
+
+	# def __init__(self, *args, **kwargs):
+	# 	super(PreferenceForm, self).__init__(*args, **kwargs)
+		# self.fields['flavor'].queryset = models.FlavorDetail.objects.all()
+
+		# super(PreferenceForm, self).__init__(*args, **kwargs)
+		# self.fields['beans'].label = 'Bean Name'
+		# self.fields['flavor'].label = 'Flavor'
+		# self.fields['detail'].label = 'Category'
+
