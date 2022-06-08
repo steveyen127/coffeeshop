@@ -4,7 +4,18 @@ from django.contrib import messages
 from . import forms
 
 def index(request):
-	beans = models.Beans.objects.all()
+	if request.method == 'POST':
+		order = request.POST.get('order')
+		if order== "Order by name":
+			beans = models.Beans.objects.all().order_by('name')
+		elif order== "Order by roast":
+			beans = models.Beans.objects.all().order_by('roast')
+		else:
+			beans = models.Beans.objects.all().order_by('flavor_detail')
+		
+	else:
+		beans = models.Beans.objects.all()
+		# messages.add_message(request, messages.WARNING, "not received")
 	return render(request, "shop/index.html", locals())
 
 

@@ -9,7 +9,6 @@ class Beans(models.Model):
 	name = models.CharField(max_length=100, null=False)
 	price = models.PositiveIntegerField(default=0, null=False)
 	picture = models.URLField()
-
 	description = models.TextField()
 	origin = models.CharField(max_length=100, null=False)
 	roast = models.CharField(max_length=50, choices=ROAST)
