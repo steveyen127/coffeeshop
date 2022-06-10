@@ -23,5 +23,6 @@ urlpatterns = [
     path('roast/', shop.roast),
     path('flavor/', shop.flavor),
     path('flavor_detail/', shop.flavor_detail),
+    path('<int:beanno>/', shop.bean_detail, name='beans-url'),
 ]
 

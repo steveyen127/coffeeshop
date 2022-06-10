@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from main import models
 from django.contrib import messages
 from . import forms
@@ -12,11 +12,18 @@ def index(request):
 			beans = models.Beans.objects.all().order_by('roast')
 		else:
 			beans = models.Beans.objects.all().order_by('flavor_detail')
-		
 	else:
 		beans = models.Beans.objects.all()
 		# messages.add_message(request, messages.WARNING, "not received")
 	return render(request, "shop/index.html", locals())
+
+
+def bean_detail(request, beanno=0):
+	if beanno==0:
+		return redirect('/')
+		
+	beans = models.Beans.objects.get(id=beanno)
+	return render(request, "shop/bean_detail.html", locals())
 
 
 # uses session to send the choosen roast

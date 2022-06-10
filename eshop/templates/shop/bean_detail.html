@@ -1,0 +1,49 @@
+{% extends "shop/base.html" %}
+{% block title %} CABE {% endblock %}
+{% block content %}
+
+<style type="text/css">
+	img.beans_pic {  
+		width: 450px;
+		height: 300px;
+		float: left;
+		margin-right: 10px; 
+  	} 
+  	p.tags {
+		border-radius: 8px;
+		border: 2px solid #73AD21;
+		font-weight: bold; /* Making font bold */
+	    width: auto; /* Making auto-sizable width */
+	    height: auto; /* Making auto-sizable height */
+	    padding: 5px; /* Making space around letters */
+	    margin-right:10px;
+	    display:inline;
+	    float:left;
+	}
+</style>
+
+<div class="container">
+	<br>
+	<h2>{{ beans.name }}</h2>
+	<br>
+	<div class="row">
+		<div class="col-md-5">
+			<img src="{{beans.picture }}" class="beans_pic">
+		</div>	
+		<div class="col-md-5">
+			<div class="beans_descrip">
+				<p>{{ beans.description }}</p>
+				<br>
+				<h4>Price: ${{ beans.price }}</h4>
+				<br>
+				<p class="tags">{{ beans.roast }}</p>
+				<p class="tags">{{ beans.flavor_detail }}</p>
+			</div>
+			
+		</div>
+	</div>
+	
+	<br>
+</div>
+
+{% endblock %}
