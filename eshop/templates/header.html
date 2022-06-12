@@ -1,0 +1,64 @@
+{% load static %}
+
+<style type="text/css">
+  #hello-msg{
+    font-size: 18px;
+    margin-right: 20px;
+    }
+</style>
+
+<div class="col-md-12 px-0" align="center" style="background-color: #fff4de;">
+  <a href="/"><img src="{% static 'logo/banner.png' %}" height="250px"></a>
+</div>
+
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="{% url 'store' %}">CABE</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/roast/">Choose Bean<span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'store' %}">Shop</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+    
+
+    
+
+    </div>
+  </div>
+  {% if request.user.is_authenticated %}
+    <span class="hello-msg" style="margin-right: 20px">
+      <i class="bi bi-person-circle"  style="font-size: 1.5em; margin-right: 5px"></i>{{request.user}} 
+    </span>
+
+    <span>
+      <a class="hello-msg"href="{% url 'logout' %}" style="margin-right: 20px">Logout</a>
+    </span>
+  {% else %}
+    <a href="{% url 'login' %}">
+      <span class="glyphicon glyphicon-log-in"></span>Login
+    </a>
+  {% endif %}
+
+  <span>
+    <a href="{% url 'cart' %}">
+      <i class="bi bi-cart" style="font-size: 2.0em; margin-right: 5px"></i>
+    </a>
+    {{cartItems}}
+  </span>
+  
+  
+</nav>
+</div>

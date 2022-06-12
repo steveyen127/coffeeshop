@@ -1,0 +1,110 @@
+{% extends "shop/base.html" %}
+
+{% block title %} CABE {% endblock %}
+{% block content %}
+	<style type="text/css">
+		 p.descrip { 
+			/* Applying an ellipsis to multiline text */
+			display: -webkit-box; 
+			max-width: 100%;
+			-webkit-line-clamp: 4;
+			-webkit-box-orient: vertical; 
+			overflow: hidden;
+		}
+		 #check_size input {
+		 	/* change size of the checkbox icon */
+		    height: 2vh;
+		    width: 2vw;
+		    etc.
+		}
+
+		#check_text label  {
+			/* change font size in checkbox */
+		    font-size:  120%;
+		}
+		p.tags {
+			/* show tag labels in rounded corner */
+			border-radius: 8px;
+			border: 2px solid #73AD21;
+			font-weight: bold; 
+		    width: auto; /* Making auto-sizable width */
+		    height: auto; /* Making auto-sizable height */
+		    padding: 5px; /* Making space around letters */
+		    margin-right:10px;
+		    display:inline;
+		    float:left;
+		}
+		input[type=submit]{
+			/* adjust submit(input) button to normal button */
+			padding: 0;
+			border: none;
+			background: none;
+		}
+		.custom-radio-list {
+		    list-style-type: none;
+		    padding: 0;
+		    margin: 0;
+		}
+	</style>
+
+	{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+	{% endfor %}
+	<div class="container">
+		<form name='my_form' action='.' method='POST'>
+			{% csrf_token %}
+			<table>
+				<!-- We don't use {{ form.as_table }}, in order to apply css -->
+				{% for f in form %}
+					<h2>
+						{{ f.label }} Level
+					</h2>
+					<div id="check_size">
+						<label id="check_text" for="checkbox">{{ f }}</label>
+					</div>
+				{% endfor %}
+			</table>
+			<button type="button"><input type="submit" value="Submit"></button>
+			{% if not_last %}
+			    <button type="button" onclick="location.href = '{{ not_last }}';" style="margin:8px;">Next filter</button>
+			{% endif %}
+		</form>	
+	</div>
+	<br>
+
+	{% if selected_beans %}
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card-heading" align="center">
+						<h2>Selected Beans</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			{% for b in selected_beans %}
+				<div class="col-md-3 col-sm-12 d-flex align-items-stretch">
+					<div class="card mt-4" style="width: 18rem;">
+						<img src="{{ b.picture }}" class="card-img-top" style="width: 100%; height: 200px;">
+						<div class="card-heading" align="center">
+							<h3>{{ b.name }}</h3>
+							<h3>NT ${{ b.price }}</h3>
+						</div>
+						<div class="card-body">
+						    <p class="card-text"><p class="descrip">{{ b.description }}</p></p>
+						    <p class="card-text">
+						    	<!-- <div style="display: flex; justify-content: space-between;"> -->
+							    	<p class="tags">{{ b.roast }}</p>
+							    	<p class="tags">{{ b.flavor_detail }}</p>
+						    	<!-- </div> -->
+						    </p>
+						</div>
+						 <button data-product={{b.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+			<br>
+		</div>
+	{% endif %}
+{% endblock %}
