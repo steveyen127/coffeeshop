@@ -1,43 +1,71 @@
 {% load static %}
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(){
+    
+    window.addEventListener('scroll', function() {
+         
+      if (window.scrollY > 250) {
+        document.getElementById('navbar_top').classList.add('fixed-top');
+        // add padding top to show content behind navbar
+        navbar_height = document.querySelector('.navbar').offsetHeight;
+        document.body.style.paddingTop = navbar_height + 'px';
+      } else {
+        document.getElementById('navbar_top').classList.remove('fixed-top');
+         // remove padding top from body
+        document.body.style.paddingTop = '0';
+      } 
+    });
+  }); 
+  // DOMContentLoaded  end
+</script>
 
 <style type="text/css">
   #hello-msg{
     font-size: 18px;
     margin-right: 20px;
     }
+
+  .navbar-custom {
+    background-color: #A47148;
+    }
+
 </style>
 
 <div class="col-md-12 px-0" align="center" style="background-color: #fff4de;">
   <a href="/"><img src="{% static 'logo/banner.png' %}" height="250px"></a>
 </div>
 
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="{% url 'store' %}">CABE</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<!-- ============= COMPONENT ============== -->
+<nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark navbar-custom">
+ <div class="container">
+   <a class="navbar-brand" href="{% url 'store' %}">CABE</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="main_nav">
+  
+  <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="/roast/">Choose Bean</a></li>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/roast/">Choose Bean<span class="sr-only"></span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'store' %}">Shop</a>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{% url 'store' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Shop
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/">All Products</a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="{% url 'roast-url' 'Light' %}">Light Roast</a></li>
+            <li><a class="dropdown-item" href="{% url 'roast-url' 'Medium' %}">Medium Roast</a></li>
+            <li><a class="dropdown-item" href="{% url 'roast-url' 'Dark' %}">Dark Roast</a></li>
+            <li><a class="dropdown-item" href="{% url 'flavor-url' 'Flower' %}">Flower Flavor</a></li>
+            <li><a class="dropdown-item" href="{% url 'flavor-url' 'Berry' %}">Berry Flavor</a></li>
+            <li><a class="dropdown-item" href="{% url 'flavor-url' 'Wood' %}">Wood Flavor</a></li>
+          </ul>
       </li>
     </ul>
-    <div class="form-inline my-2 my-lg-0">
-    
-
-    
-
-    </div>
-  </div>
+  </div> <!-- navbar-collapse.// -->
   {% if request.user.is_authenticated %}
     <span class="hello-msg" style="margin-right: 20px">
       <i class="bi bi-person-circle"  style="font-size: 1.5em; margin-right: 5px"></i>{{request.user}} 
@@ -47,18 +75,19 @@
       <a class="hello-msg"href="{% url 'logout' %}" style="margin-right: 20px">Logout</a>
     </span>
   {% else %}
-    <a href="{% url 'login' %}">
-      <span class="glyphicon glyphicon-log-in"></span>Login
+    <a href="{% url 'login' %}" class="btn " style="height: 50px;">
+      <i class="bi bi-box-arrow-in-right" style= "font-size:1.5em;margin-right:10px;"></i>Login
     </a>
   {% endif %}
 
   <span>
-    <a href="{% url 'cart' %}">
-      <i class="bi bi-cart" style="font-size: 2.0em; margin-right: 5px"></i>
+    <a href="{% url 'cart' %}" class="btn " style=" margin-left: 20px;">
+      <i class="bi bi-cart" style="font-size: 1.5em; "></i>
+      {{cartItems}}
     </a>
-    {{cartItems}}
+    
   </span>
-  
-  
+ </div> <!-- container-fluid.// -->
 </nav>
-</div>
+<!-- ============= COMPONENT END// ============== -->
+

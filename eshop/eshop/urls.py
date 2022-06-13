@@ -31,6 +31,7 @@ urlpatterns = [
     path('flavor/', shop.flavor),
     path('flavor_detail/', shop.flavor_detail),
     path('<int:beanno>/', shop.bean_detail, name='beans-url'),
-
+    path('/roast/<str:rtype>/', shop.shop_roast, name='roast-url'),
+    path('/flavor/<str:ftype>/', shop.shop_flavor, name='flavor-url'),
 ]
 

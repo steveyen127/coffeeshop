@@ -159,6 +159,21 @@ def bean_detail(request, beanno=0):
 	beans = Beans.objects.get(id=beanno)
 	return render(request, "shop/bean_detail.html", locals())
 
+def shop_roast(request, rtype=""):
+	if rtype != "":
+		selected_beans = Beans.objects.filter(roast=rtype)
+	# else:
+		# messages.add_message(request, messages.WARNING, "fail")
+	return render(request, "shop/shop_roast.html", locals())
+
+
+def shop_flavor(request, ftype=""):
+	if ftype != "":
+		selected_beans = Beans.objects.filter(flavor=ftype)
+	# else:
+	# 	messages.add_message(request, messages.WARNING, "fail")
+	return render(request, "shop/shop_flavor.html", locals())
+
 
 # uses session to send the choosen roast
 def roast(request):
@@ -191,13 +206,13 @@ def flavor(request):
 	data = cartData(request)
 	cartItems = data['cartItems']
 
+	roast = request.session['roast']
 	not_last = "/flavor_detail/" #not the last page of the questionnaire 
 	if request.method == 'POST':
 		form = forms.FlavorForm(request.POST)
 		if form.is_valid():
 			# messages.add_message(request, messages.WARNING, "send roast_form success")
 			flavor = request.POST['flavor']
-			roast = request.session['roast']
 			if roast == '#':
 				# there isn't any input from the previous pages
 				# messages.add_message(request, messages.WARNING, "no roast")

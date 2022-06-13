@@ -34,7 +34,10 @@
 			<div class="beans_descrip">
 				<p>{{ beans.description }}</p>
 				<br>
-				<h4>Price: ${{ beans.price }}              	<button data-product={{beans.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button></h4>
+				<h4>
+					Price: ${{ beans.price }}              	
+					<button data-product={{beans.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart" style="margin-left: 20px;"><i class="bi bi-cart-plus" style="font-size: 1.5em; margin-right: 10px;"></i>Add to Cart</button>
+				</h4>
 
 				<br>
 				<p class="tags">{{ beans.roast }}</p>
